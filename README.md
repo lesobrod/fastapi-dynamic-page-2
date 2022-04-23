@@ -7,7 +7,7 @@
 * Jinja2 Templates
 * Python Requests
 ## Примечания
-Сторонний сервис перевода  
+Сторонний [сервис перевода](https://mymemory.translated.net/doc/spec.php)  
 Не всегда работает корректно  
 
 Установка зависимостей:  
