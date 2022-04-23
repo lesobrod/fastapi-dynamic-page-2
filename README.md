@@ -16,5 +16,5 @@
 Стиль оформления:  
 `/static/global-style.css`
 ## TODO
-* Возможно ли создавать request FastAPI, не загружая дополнительно requests?
+* Возможно ли создавать request из FastAPI, не загружая дополнительно requests?
 * Перенос строки в Javascript Template literals работает некорректно при использовании как переменной
