@@ -11,12 +11,6 @@ h1 {
     text-align: center;
 }
 
-li {
-    list-style-type: '☆  ';
-    margin: 15px 0;
-}
-
-
 .center {
     display: block;
     margin-left: auto;

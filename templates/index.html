@@ -5,28 +5,42 @@
     <link href="{{ url_for('static', path='/global-style.css') }}" rel="stylesheet">
     <title>Создание списка</title>
 </head>
+
 <body>
 <h1>Список сообщений</h1>
 <form action="" onsubmit="sendMessage(event)">
     <input type="text" id="messageText" autocomplete="off"/>
     <button>Отправить</button>
 </form>
+
 <ol id='messages'>
 </ol>
-<button onclick="document.getElementById('messages').innerHTML = ''">Очистить</button>
+
+<button onclick="document.getElementById('messages').innerHTML = ''">
+    Очистить
+</button>
+
 <script>
     var ws = new WebSocket("ws://localhost:8000/ws");
     ws.onmessage = function (event) {
         var messages = document.getElementById('messages')
         var message = document.createElement('li')
-        var content = document.createTextNode(event.data)
+        var recv_data = JSON.parse(event.data)
+        var format_data = `${recv_data.agent} ask: ${recv_data.input}
+        Answer: ${recv_data.output}
+        At ${recv_data.timestamp}`
+        var content = document.createTextNode(format_data)
         message.appendChild(content)
         messages.appendChild(message)
     };
 
     function sendMessage(event) {
         var input = document.getElementById("messageText")
-        ws.send(input.value)
+        var send_data = JSON.stringify({
+            text: input.value,
+            agent: navigator.userAgent
+        })
+        ws.send(send_data)
         input.value = ''
         event.preventDefault()
     }
