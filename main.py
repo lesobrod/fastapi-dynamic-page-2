@@ -50,7 +50,7 @@ async def websocket_endpoint(websocket: WebSocket):
         dt_string = now.strftime("%d/%m/%Y %H:%M")
 
         send_data = {
-            'agent':recv_data['agent'],
+            'agent':recv_data['agent'].partition(' ')[0],
             'timestamp': dt_string,
             'input': recv_data['text'],
             'output': get_translation(recv_data['text'])
