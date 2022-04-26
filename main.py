@@ -42,14 +42,19 @@ def read_root(request: Request):
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+    counter = 0
     await websocket.accept()
     while True:
         recv_data = await websocket.receive_json()
+        if not recv_data:
+            counter = 0
+            continue
 
         now = datetime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M")
-
+        counter += 1
         send_data = {
+            'id': counter,
             'agent':recv_data['agent'].partition(' ')[0],
             'timestamp': dt_string,
             'input': recv_data['text'],
